@@ -69,7 +69,7 @@ const Navabar = () => {
                 <Link to="/portfolio/create">create porfolio</Link>
               </li>
               <li>
-                <Link>Logout</Link>
+                <Link to="/section1main1">section1main1</Link>
               </li>
             </ul>
           </div>

@@ -5,9 +5,16 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+         'sm': '320px', 
+      },
+    },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"),
+  require('tailwindcss-debug-screens'),
+
+  ],
   daisyui: {
     themes: ["winter"],
   },
