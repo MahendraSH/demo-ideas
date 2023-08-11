@@ -13,10 +13,10 @@ const About = () => {
               <img
                 //   src="https://avatars.githubusercontent.com/u/88196283?v=4"
                 src="https://res.cloudinary.com/dranaclni/image/upload/v1690273086/IMG-20230305-WA0000-PhotoRoom_w5r90c.png"
-                className="  max-w-xs rounded-lg shadow-2xl  card-body block"
+                className=" rounded-lg lg:shadow-2xl  card-body block"
               />
             </div>
-            <div className="min-w-96 w-3/6 sm:w-full">
+            <div className="w-3/6 sm:w-full">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
               aperiam blanditiis maiores, iusto amet tempora, molestias rerum
               dolores exercitationem numquam repellat in illo eligendi voluptas

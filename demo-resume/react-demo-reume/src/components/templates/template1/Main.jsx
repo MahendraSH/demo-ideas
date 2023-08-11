@@ -4,16 +4,16 @@ const Main = () => {
   return (
     <>
       <div
-        className="hero min-h-screen xl:w-ful  lg:w-full md: w-full sm:w-80 " id="main"
+      id="main"
+        className="hero min-h-screen"
         style={{
           backgroundImage:
             "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
         }}
       >
         <div className="hero-overlay bg-opacity-60"></div>
-        <div className="hero-content text-center text-zinc-600">
-          <div className="  ">
-            <div className="card md:card-side bg-gradient-to-tr from-slate-300 via-fuchsia-50 to-cyan-100shadow-xl w-full  p-5">
+        <div className="hero-content text-center text-neutral-content">
+          <div className="card md:card-side bg-gradient-to-tr from-slate-300 via-fuchsia-50 to-cyan-100 shadow-xl w-full  p-5">
             <figure className="w-56 lg:w-96">
               {" "}
               <img

@@ -1,64 +1,62 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className=" justify-center p-0 m-0 fixed w-full z-40   ">
-      <div className="navbar bg-gradient-to-tr from-slate-300 via-fuchsia-50 to-cyan-100  m=0 p-0 mx-auto lg:w-10/12 w-full  shadow-md shadow-slate-600  ">
-        <div className="navbar-start ">
-          <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+    <>
+      <div className="navbar  bg-gradient-to-tr from-slate-300 via-fuchsia-50 to-cyan-100 shadow-sm  shadow-neutral-200  justify-center p-0 m-0 fixed w-full z-40 ">
+        <div className="navbar-start">
+          <div className="drawer lg:hidden">
+            <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+            <div className="drawer-content">
+              {/* Page content here */}
+              <label
+                htmlFor="my-drawer"
+                className="btn btn-primary drawer-button  btn-ghost "
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a href="/#about">About</a>
-              </li>
-              <li>
-                <a href="#edu"> Education</a>
-              </li>
-              <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>projects</a>
-              </li>
-              <li>
-                <a>contact</a>
-              </li>
-              <li>
-                <a> Blog</a>
-              </li>
-            </ul>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h8m-8 6h16"
+                  />
+                </svg>
+              </label>
+            </div>
+            <div className="drawer-side">
+              <label htmlFor="my-drawer" className="drawer-overlay"></label>
+              <ul className="menu p-4 w-80 h-fullbg-gradient-to-tr from-slate-300 via-fuchsia-50 to-cyan-100">
+                {/* Sidebar content here */}
+                <li>
+                  <a>Item 1</a>
+                </li>
+                <li>
+                  <a>Parent</a>
+                  <ul className="p-2">
+                    <li>
+                      <a>Submenu 1</a>
+                    </li>
+                    <li>
+                      <a>Submenu 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a>Item 3</a>
+                </li>
+              </ul>
+            </div>
           </div>
-          <a href="#main" className="btn btn-ghost normal-case text-xl">
-            Mahendra{" "}
-          </a>
+          <a href="#main" className="btn btn-ghost normal-case text-xl">Mahendra</a>
         </div>
-        <div className="navbar-center lg:flex  md:hidden sm:hidden ">
+        <div className="navbar-center sm:hidden md:hidden lg:flex ">
           <ul className="menu menu-horizontal px-1">
             <li>
               <a href="#about">About</a>
@@ -90,7 +88,8 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div className="navbar-end mr-2">
+        <div className="navbar-end">
+          {/* <a className="btn">*</a> */}
           <label className="swap swap-rotate btn btn-ghost btn-circle ">
             {/* this hidden checkbox controls the state */}
             <input type="checkbox" />
@@ -115,7 +114,7 @@ const Navbar = () => {
           </label>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
