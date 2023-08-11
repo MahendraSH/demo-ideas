@@ -1,15 +1,15 @@
-import { HashRouter, Route, Router, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import './App.css'
 import Layout from './components/Layout';
 import CreateProtfolio from './pages/CreateProtfolio';
 import HomePage  from './pages/HomePage';
-import Section1main1 from './components/templates/section1/Section1main1';
+import Section1main1 from './components/templates/template1/Section1main1';
 import Porfolio from './pages/Porfolio';
 
 
 const App = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         {/* <Route path='/' element={<Layout/>}>
           <Route path='/' element={<HomePage/>}/>
@@ -24,7 +24,7 @@ const App = () => {
           <Route path='/portfolio' element={<Porfolio/>}/>
         
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 

@@ -1,10 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-const Nabar5 = () => {
+const Navbar = () => {
   return (
-    <div className="relative justify-center p-0 m-0 ">
-      <div className="navbar bg-base-100 m=0 p-0 mx-auto lg:w-10/12 w-full  shadow-md shadow-slate-600  ">
+    <div className=" justify-center p-0 m-0 fixed w-full z-40   ">
+      <div className="navbar bg-gradient-to-tr from-slate-300 via-fuchsia-50 to-cyan-100  m=0 p-0 mx-auto lg:w-10/12 w-full  shadow-md shadow-slate-600  ">
         <div className="navbar-start ">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -27,60 +26,67 @@ const Nabar5 = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              
               <li>
-                <Link>About</Link>
+                <a href="/#about">About</a>
               </li>
               <li>
-                <Link>Parent</Link>
+                <a href="#edu"> Education</a>
+              </li>
+              <li>
+                <a>Parent</a>
                 <ul className="p-2">
                   <li>
-                    <Link>Submenu 1</Link>
+                    <a>Submenu 1</a>
                   </li>
                   <li>
-                    <Link>Submenu 2</Link>
+                    <a>Submenu 2</a>
                   </li>
                 </ul>
               </li>
               <li>
-                <Link>Item 3</Link>
+                <a>projects</a>
+              </li>
+              <li>
+                <a>contact</a>
+              </li>
+              <li>
+                <a> Blog</a>
               </li>
             </ul>
           </div>
-          <Link  to ="/"className="btn btn-ghost normal-case text-xl">Mahendra </Link>
+          <a href="#main" className="btn btn-ghost normal-case text-xl">
+            Mahendra{" "}
+          </a>
         </div>
         <div className="navbar-center lg:flex  md:hidden sm:hidden ">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <Link>About</Link>
+              <a href="#about">About</a>
             </li>
             <li>
-              <Link> Education</Link>
+              <a href="#edu"> Education</a>
             </li>
             <li tabIndex={0}>
               <details>
-                <summary>skils</summary>
+                <summary>skills</summary>
                 <ul className="p-2">
                   <li>
-                    <Link>Submenu 1</Link>
+                    <a>Submenu 1</a>
                   </li>
                   <li>
-                    <Link>Submenu 2</Link>
+                    <a>Submenu 2</a>
                   </li>
                 </ul>
               </details>
             </li>
             <li>
-              <Link>projects</Link>
-              
+              <a>projects</a>
             </li>
             <li>
-              <Link>contact</Link>
-
+              <a>contact</a>
             </li>
             <li>
-              <Link> Blog</Link>
-
+              <a> Blog</a>
             </li>
           </ul>
         </div>
@@ -113,4 +119,4 @@ const Nabar5 = () => {
   );
 };
 
-export default Nabar5;
+export default Navbar;
