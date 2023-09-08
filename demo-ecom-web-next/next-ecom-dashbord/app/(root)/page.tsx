@@ -1,9 +1,18 @@
-import { FC } from "react";
+"use client";
+import { useStoreModal } from "@/hooks/use-store-modal";
+import { FC, useEffect } from "react";
 
-interface pageProps {}
+interface MainPageProps {}
 
-const page: FC<pageProps> = ({}) => {
-  return <div>page</div>;
+const MainPage: FC<MainPageProps> = ({}) => {
+  const onOpen = useStoreModal((state) => state.onOpen);
+  const isOpen = useStoreModal((state) => state.isOpen);
+  useEffect(() => {
+    if (!isOpen) {
+      onOpen();
+    }
+  }, [isOpen, onOpen]);
+  return <div>Main page</div>;
 };
 
-export default page;
+export default MainPage;
