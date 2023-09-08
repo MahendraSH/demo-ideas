@@ -12,6 +12,11 @@ const MainNav = ({
 
   const routes = [
     {
+      herf: `/${params.storeId}`,
+      label: "Home",
+      active: pathname === `/${params.storeId}`,
+    },
+    {
       herf: `/${params.storeId}/settings`,
       label: "Settings",
       active: pathname === `/${params.storeId}/settings`,
