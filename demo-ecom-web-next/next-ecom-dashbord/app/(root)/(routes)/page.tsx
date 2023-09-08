@@ -12,7 +12,7 @@ const MainPage: FC<MainPageProps> = ({}) => {
       onOpen();
     }
   }, [isOpen, onOpen]);
-  return <div>Main page</div>;
+  return null;
 };
 
 export default MainPage;
