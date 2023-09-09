@@ -6,7 +6,7 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Category } from "@prisma/client";
+import { Billbord, Category } from "@prisma/client";
 import { useParams, useRouter } from "next/navigation";
 
 import Heading from "@/components/ui/heading";
@@ -23,18 +23,26 @@ import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import axios from "axios";
 import AlertModal from "@/components/modals/alert-modal";
-import ImageUpload from "@/components/ui/image-upload";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface CategoryFormProps {
   intialData: Category | null;
+  billbords: Billbord[];
 }
 
 const formSchema = z.object({
   name: z.string().min(3),
+  billbordId: z.string().min(3),
 });
 type settingFormsValues = z.infer<typeof formSchema>;
 
-const CategoryForm: FC<CategoryFormProps> = ({ intialData }) => {
+const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
   const title = intialData === null ? "Create Category" : "Edit Category";
   const discription =
     intialData == null ? " Add a new Category " : "Edit a Category ";
@@ -54,6 +62,7 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData }) => {
     resolver: zodResolver(formSchema),
     defaultValues: intialData || {
       name: "",
+      billbordId: "",
     },
   });
 
@@ -93,7 +102,7 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData }) => {
       router.push(`/${params.storeId}/categorys`);
     } catch (error) {
       toast.error(
-        " Something when wrong . Category can`t be deleted ,   recover all catagorys "
+        " Something when wrong . Category can`t be deleted ,   recover all products "
       );
     } finally {
       setLoading(false);
@@ -138,10 +147,38 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData }) => {
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="Category label "
+                      placeholder="Category name "
                       {...field}
                     />
                   </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="billbordId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel> Billbord </FormLabel>
+                  <Select
+                    disabled={loading}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue
+                          defaultValue={field.value}
+                          placeholder="Select  a billbord "
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {billbords.map((item) => (
+                        <SelectItem value={item.id}>{item.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </FormItem>
               )}
             />

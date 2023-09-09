@@ -36,7 +36,7 @@ const BillbordClient: FC<BillbordClientProps> = ({ data = [] }) => {
       </div>
 
       <Separator />
-      <DataTable columns={columns} data={data} />
+      <DataTable searchKeyWord={"label"} columns={columns} data={data} />
       <Separator />
       <Heading title="API " description="API calls  for billbords" />
       <ApiList entityName="billbords" entityId="billbordId" />

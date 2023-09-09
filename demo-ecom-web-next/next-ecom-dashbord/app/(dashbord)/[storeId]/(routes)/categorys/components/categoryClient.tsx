@@ -36,7 +36,7 @@ const CategoryClient: FC<CategoryClientProps> = ({ data = [] }) => {
       </div>
 
       <Separator />
-      <DataTable columns={columns} data={data} />
+      <DataTable searchKeyWord={"name"} columns={columns} data={data} />
       <Separator />
       <Heading title="API " description="API calls  for Categorys" />
       <ApiList entityName="Categorys" entityId="CategoryId" />

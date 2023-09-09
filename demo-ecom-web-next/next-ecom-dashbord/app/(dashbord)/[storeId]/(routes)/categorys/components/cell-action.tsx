@@ -40,10 +40,10 @@ const CellActon: FC<CellActonProps> = ({ data }) => {
       await axios.delete(`/api/${params.storeId}/categorys/${data.id}`);
       router.refresh();
       setOpen(false);
-      toast.success(" BillBord deleted .");
+      toast.success(" Category deleted .");
     } catch (error) {
       toast.error(
-        " Something when wrong . billbord can`t be deleted ,   recover all catagorys "
+        " Something when wrong . Category can`t be deleted  all products , "
       );
     } finally {
       setLoading(false);
@@ -75,7 +75,7 @@ const CellActon: FC<CellActonProps> = ({ data }) => {
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
-              router.push(`/${params.storeId}/billbords/${data.id}`);
+              router.push(`/${params.storeId}/categorys/${data.id}`);
             }}
           >
             <EditIcon className="h-4 w-4 mr-2 " />
