@@ -23,8 +23,13 @@ const MainNav = ({
     },
     {
       herf: `/${params.storeId}/categorys`,
-      label: "Category",
+      label: "Categorys",
       active: pathname === `/${params.storeId}/categorys`,
+    },
+    {
+      herf: `/${params.storeId}/sizes`,
+      label: "sizes",
+      active: pathname === `/${params.storeId}/sizes`,
     },
     {
       herf: `/${params.storeId}/settings`,
