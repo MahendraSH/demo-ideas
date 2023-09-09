@@ -17,6 +17,9 @@ const DashbordLayout: FC<DashbordLayoutProps> = async ({
   if (!userId) {
     redirect("/sign-in");
   }
+  if (params.storeId.length < 24) {
+    redirect("/");
+  }
   const store = await prismadb.store.findFirst({
     where: {
       id: params.storeId,

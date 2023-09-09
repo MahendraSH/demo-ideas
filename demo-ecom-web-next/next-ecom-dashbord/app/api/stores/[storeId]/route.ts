@@ -17,7 +17,7 @@ export async function PATCH(
     if (!name) {
       return new NextResponse("Name is required", { status: 400 });
     }
-    if (!params.storeId) {
+    if (!params.storeId ||  params.storeId.length< 24) {
       return new NextResponse("Store id is required ", { status: 400 });
     }
     const store = await prismadb.store.updateMany({
@@ -45,7 +45,7 @@ export async function DELETE(
     if (!userId) {
       return new NextResponse("unautherized exiss", { status: 401 });
     }
-    if (!params.storeId) {
+    if (!params.storeId || params.storeId.length < 24) {
       return new NextResponse("Store id is required ", { status: 400 });
     }
     const store = await prismadb.store.deleteMany({
