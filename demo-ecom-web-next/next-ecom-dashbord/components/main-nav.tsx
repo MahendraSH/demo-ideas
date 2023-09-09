@@ -22,6 +22,11 @@ const MainNav = ({
       active: pathname === `/${params.storeId}/billbords`,
     },
     {
+      herf: `/${params.storeId}/categorys`,
+      label: "Category",
+      active: pathname === `/${params.storeId}/categorys`,
+    },
+    {
       herf: `/${params.storeId}/settings`,
       label: "Settings",
       active: pathname === `/${params.storeId}/settings`,
@@ -34,7 +39,7 @@ const MainNav = ({
         <Link
           href={route.herf}
           className={cn(
-            "text-sm font-medium transition-colors hover:text-primary ",
+            "text-sm font-medium transition-colors hover:text-primary first-letter:capitalize",
             route.active
               ? "text-black dark:text-white"
               : "text-muted-foreground"
