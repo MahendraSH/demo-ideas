@@ -32,6 +32,11 @@ const MainNav = ({
       active: pathname === `/${params.storeId}/sizes`,
     },
     {
+      herf: `/${params.storeId}/colors`,
+      label: "colors",
+      active: pathname === `/${params.storeId}/colors`,
+    },
+    {
       herf: `/${params.storeId}/settings`,
       label: "Settings",
       active: pathname === `/${params.storeId}/settings`,
