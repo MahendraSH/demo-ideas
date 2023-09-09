@@ -9,6 +9,7 @@ import Heading from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/ui/data-table";
 import { BillbordColumns, columns } from "./columns";
+import ApiList from "@/components/ui/api-list";
 
 interface BillbordClientProps {
   data: BillbordColumns[] | [];
@@ -36,6 +37,9 @@ const BillbordClient: FC<BillbordClientProps> = ({ data = [] }) => {
 
       <Separator />
       <DataTable columns={columns} data={data} />
+      <Separator />
+      <Heading title="API " description="API calls  for billbords" />
+      <ApiList entityName="billbords" entityId="billbordId" />
     </>
   );
 };
