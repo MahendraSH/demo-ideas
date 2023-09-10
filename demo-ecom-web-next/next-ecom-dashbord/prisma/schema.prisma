@@ -103,6 +103,7 @@ model Product {
 model Image {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   productId String    @db.ObjectId
+  url  String 
   product   Product   @relation("ProductToImage", fields: [productId], references: [id], onDelete: Cascade)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
