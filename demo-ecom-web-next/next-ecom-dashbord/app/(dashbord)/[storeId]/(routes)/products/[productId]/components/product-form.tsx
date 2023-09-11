@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Category, Color, Image, Product, Size } from "@prisma/client";
 import { useParams, useRouter } from "next/navigation";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 import Heading from "@/components/ui/heading";
 import { Button } from "@/components/ui/button";
@@ -21,8 +23,6 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import toast from "react-hot-toast";
-import axios from "axios";
 import AlertModal from "@/components/modals/alert-modal";
 import ImageUpload from "@/components/ui/image-upload";
 import {
@@ -327,13 +327,14 @@ const ProductForm: FC<ProductFormProps> = ({
                   <FormControl>
                     <Checkbox
                       checked={field.value}
+                      //@ts-ignore
                       onCheckedChange={field.onChange}
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
                     <FormLabel>Archived</FormLabel>
                     <FormDescription>
-                      This product will not apper anywhere in the store.
+                      This product will not apper anywhere in the store. 
                     </FormDescription>
                   </div>
                 </FormItem>
@@ -347,6 +348,7 @@ const ProductForm: FC<ProductFormProps> = ({
                   <FormControl>
                     <Checkbox
                       checked={field.value}
+                      //@ts-ignore
                       onCheckedChange={field.onChange}
                     />
                   </FormControl>
