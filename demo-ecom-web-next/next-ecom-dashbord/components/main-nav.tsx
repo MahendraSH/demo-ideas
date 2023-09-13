@@ -23,8 +23,23 @@ const MainNav = ({
     },
     {
       herf: `/${params.storeId}/categorys`,
-      label: "Category",
+      label: "Categorys",
       active: pathname === `/${params.storeId}/categorys`,
+    },
+    {
+      herf: `/${params.storeId}/sizes`,
+      label: "sizes",
+      active: pathname === `/${params.storeId}/sizes`,
+    },
+    {
+      herf: `/${params.storeId}/colors`,
+      label: "colors",
+      active: pathname === `/${params.storeId}/colors`,
+    },
+    {
+      herf: `/${params.storeId}/products`,
+      label: "products",
+      active: pathname === `/${params.storeId}/products`,
     },
     {
       herf: `/${params.storeId}/settings`,

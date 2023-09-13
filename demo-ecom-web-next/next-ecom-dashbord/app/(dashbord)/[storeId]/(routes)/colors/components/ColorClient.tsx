@@ -8,14 +8,14 @@ import { Button } from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/ui/data-table";
-import { CategoryColumns, columns } from "./columns";
+import { ColorColumns, columns } from "./columns";
 import ApiList from "@/components/ui/api-list";
 
-interface CategoryClientProps {
-  data: CategoryColumns[] | [];
+interface ColorClientProps {
+  data: ColorColumns[] | [];
 }
 
-const CategoryClient: FC<CategoryClientProps> = ({ data = [] }) => {
+const ColorClient: FC<ColorClientProps> = ({ data = [] }) => {
   const router = useRouter();
   const params = useParams();
 
@@ -23,12 +23,12 @@ const CategoryClient: FC<CategoryClientProps> = ({ data = [] }) => {
     <>
       <div className="flex justify-between items-center ">
         <Heading
-          title={`Categorys (${data?.length}) `}
-          description="Manage Categorys for your store "
+          title={`Colors (${data?.length}) `}
+          description="Manage Colors for your store "
         />
         <Button
           className="flex items-center  justify-between"
-          onClick={() => router.push(`/${params.storeId}/categorys/new`)}
+          onClick={() => router.push(`/${params.storeId}/colors/new`)}
         >
           <Plus className="h-4 w-4 mr-2   " />
           Add new
@@ -38,10 +38,10 @@ const CategoryClient: FC<CategoryClientProps> = ({ data = [] }) => {
       <Separator />
       <DataTable searchKeyWord={"name"} columns={columns} data={data} />
       <Separator />
-      <Heading title="API " description="API calls  for Categorys" />
-      <ApiList entityName="Categorys" entityId="CategoryId" />
+      <Heading title="API " description="API calls  for Colors" />
+      <ApiList entityName="colors" entityId="colorId" />
     </>
   );
 };
 
-export default CategoryClient;
+export default ColorClient;

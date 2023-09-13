@@ -8,12 +8,15 @@ export async function POST(
 ) {
   try {
     const { userId } = auth();
-    const { name, billbordId } = await req.json();
+    const { name, value } = await req.json();
     if (!userId) {
       return new NextResponse("unauthenticated exiss", { status: 401 });
     }
     if (!name) {
       return new NextResponse("name is required", { status: 400 });
+    }
+    if (!value) {
+      return new NextResponse("value is required", { status: 400 });
     }
     if (!params.storeId || params.storeId.length < 24) {
       return new NextResponse("params storeId  is required", { status: 400 });
@@ -28,16 +31,16 @@ export async function POST(
     if (!storeById) {
       return new NextResponse("unautherized exiss", { status: 401 });
     }
-    const category = await prismadb.category.create({
+    const color = await prismadb.color.create({
       data: {
-        storeId: params.storeId,
-        billbordId,
         name,
+        value,
+        storeId: params.storeId,
       },
     });
-    return NextResponse.json(category);
+    return NextResponse.json(color);
   } catch (error) {
-    console.log(`[category_post]  ${error}`);
+    console.log(`[color_post]  ${error}`);
     return new NextResponse("internal server error", { status: 500 });
   }
 }
@@ -51,14 +54,14 @@ export async function GET(
       return new NextResponse("params storeId  is required", { status: 400 });
     }
 
-    const categorys = await prismadb.category.findMany({
+    const colors = await prismadb.color.findMany({
       where:{
         storeId:params.storeId,
       }
     });
-    return NextResponse.json(categorys);
+    return NextResponse.json(colors);
   } catch (error) {
-    console.log(`[category_get]  ${error}`);
+    console.log(`[color_get]  ${error}`);
     return new NextResponse("internal server error", { status: 500 });
   }
 }

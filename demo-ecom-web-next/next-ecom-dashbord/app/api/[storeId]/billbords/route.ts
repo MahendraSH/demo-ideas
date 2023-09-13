@@ -54,7 +54,11 @@ export async function GET(
       return new NextResponse("params storeId  is required", { status: 400 });
     }
 
-    const billbords = await prismadb.billbord.findMany();
+    const billbords = await prismadb.billbord.findMany({
+      where:{
+        storeId:params.storeId,
+      }
+    });
     return NextResponse.json(billbords);
   } catch (error) {
     console.log(`[billbord_get]  ${error}`);

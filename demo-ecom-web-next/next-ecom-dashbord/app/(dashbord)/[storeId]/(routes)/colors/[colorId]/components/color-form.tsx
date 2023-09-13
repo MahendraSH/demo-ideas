@@ -6,7 +6,7 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Billbord, Category } from "@prisma/client";
+import { Color } from "@prisma/client";
 import { useParams, useRouter } from "next/navigation";
 
 import Heading from "@/components/ui/heading";
@@ -23,33 +23,26 @@ import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import axios from "axios";
 import AlertModal from "@/components/modals/alert-modal";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import ImageUpload from "@/components/ui/image-upload";
 
-interface CategoryFormProps {
-  intialData: Category | null;
-  billbords: Billbord[];
+interface ColorFormProps {
+  intialData: Color | null;
 }
 
 const formSchema = z.object({
   name: z.string().min(3),
-  billbordId: z.string().min(3),
+  value: z.string().min(1),
 });
 type settingFormsValues = z.infer<typeof formSchema>;
 
-const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
-  const title = intialData === null ? "Create Category" : "Edit Category";
+const ColorForm: FC<ColorFormProps> = ({ intialData }) => {
+  const title = intialData === null ? "Create Color" : "Edit Color";
   const discription =
-    intialData == null ? " Add a new Category " : "Edit a Category ";
+    intialData == null ? " Add a new Color " : "Edit a Color ";
   const tostSuccesMessage =
     intialData == null
-      ? "Category created succesfull . "
-      : " Category updated succesfull . ";
+      ? "Color created succesfull . "
+      : " Color updated succesfull . ";
   const action = intialData == null ? "Create" : "Save changes";
 
   const params = useParams();
@@ -62,7 +55,7 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
     resolver: zodResolver(formSchema),
     defaultValues: intialData || {
       name: "",
-      billbordId: "",
+      value: "",
     },
   });
 
@@ -71,18 +64,18 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
       setLoading(true);
       if (intialData) {
         await axios.patch(
-          `/api/${params.storeId}/categorys/${params.categoryId}`,
+          `/api/${params.storeId}/colors/${params.colorId}`,
           data
         );
       } else {
-        await axios.post(`/api/${params.storeId}/categorys`, data);
+        await axios.post(`/api/${params.storeId}/colors`, data);
       }
       router.refresh();
       toast.success(tostSuccesMessage);
-      router.push(`/${params.storeId}/categorys`);
+      router.push(`/${params.storeId}/colors`);
     } catch (error) {
       toast.error(
-        " Something when wrong . Category  can`t be " + intialData
+        " Something when wrong . Color  can`t be " + intialData
           ? "updated"
           : "created"
       );
@@ -91,18 +84,16 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
     }
   };
 
-  const onDeleteCategory = async () => {
+  const onDeleteColor = async () => {
     try {
       setLoading(true);
-      await axios.delete(
-        `/api/${params.storeId}/categorys/${params.categoryId}`
-      );
+      await axios.delete(`/api/${params.storeId}/colors/${params.colorId}`);
       router.refresh();
-      toast.success(" Category deleted .");
-      router.push(`/${params.storeId}/categorys`);
+      toast.success(" Color deleted .");
+      router.push(`/${params.storeId}/colors`);
     } catch (error) {
       toast.error(
-        " Something when wrong . Category can`t be deleted ,   recover all products "
+        " Something when wrong . Color can`t be deleted ,   recover all products "
       );
     } finally {
       setLoading(false);
@@ -114,7 +105,7 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
       <AlertModal
         isOpen={open}
         onClose={() => setOpen(false)}
-        onConform={onDeleteCategory}
+        onConform={onDeleteColor}
         loading={loading}
       />
       <div className="flex items-center justify-between">
@@ -147,7 +138,7 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="Category name "
+                      placeholder="Color Name  "
                       {...field}
                     />
                   </FormControl>
@@ -156,29 +147,23 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
             />
             <FormField
               control={form.control}
-              name="billbordId"
+              name="value"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel> Billbord </FormLabel>
-                  <Select
-                    disabled={loading}
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          defaultValue={field.value}
-                          placeholder="Select  a billbord "
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {billbords.map((item) => (
-                        <SelectItem key={item.id } value={item.id}>{item.label}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <FormLabel> Value </FormLabel>
+                  <FormControl>
+                    <div className="flex items-center gap-4 ">
+                      <Input
+                        disabled={loading}
+                        placeholder="Color value "
+                        {...field}
+                      />
+                      <div
+                        className="border-2 border-secondary-foreground p-4 rounded-full"
+                        style={{ backgroundColor: field.value }}
+                      />
+                    </div>
+                  </FormControl>
                 </FormItem>
               )}
             />
@@ -192,4 +177,4 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
   );
 };
 
-export default CategoryForm;
+export default ColorForm;

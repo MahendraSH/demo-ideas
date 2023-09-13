@@ -6,7 +6,7 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Billbord, Category } from "@prisma/client";
+import { Size } from "@prisma/client";
 import { useParams, useRouter } from "next/navigation";
 
 import Heading from "@/components/ui/heading";
@@ -23,33 +23,25 @@ import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import axios from "axios";
 import AlertModal from "@/components/modals/alert-modal";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import ImageUpload from "@/components/ui/image-upload";
 
-interface CategoryFormProps {
-  intialData: Category | null;
-  billbords: Billbord[];
+interface SizeFormProps {
+  intialData: Size | null;
 }
 
 const formSchema = z.object({
   name: z.string().min(3),
-  billbordId: z.string().min(3),
+  value: z.string().min(1),
 });
 type settingFormsValues = z.infer<typeof formSchema>;
 
-const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
-  const title = intialData === null ? "Create Category" : "Edit Category";
-  const discription =
-    intialData == null ? " Add a new Category " : "Edit a Category ";
+const SizeForm: FC<SizeFormProps> = ({ intialData }) => {
+  const title = intialData === null ? "Create Size" : "Edit Size";
+  const discription = intialData == null ? " Add a new Size " : "Edit a Size ";
   const tostSuccesMessage =
     intialData == null
-      ? "Category created succesfull . "
-      : " Category updated succesfull . ";
+      ? "Size created succesfull . "
+      : " Size updated succesfull . ";
   const action = intialData == null ? "Create" : "Save changes";
 
   const params = useParams();
@@ -62,7 +54,7 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
     resolver: zodResolver(formSchema),
     defaultValues: intialData || {
       name: "",
-      billbordId: "",
+      value: "",
     },
   });
 
@@ -71,18 +63,18 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
       setLoading(true);
       if (intialData) {
         await axios.patch(
-          `/api/${params.storeId}/categorys/${params.categoryId}`,
+          `/api/${params.storeId}/sizes/${params.sizeId}`,
           data
         );
       } else {
-        await axios.post(`/api/${params.storeId}/categorys`, data);
+        await axios.post(`/api/${params.storeId}/sizes`, data);
       }
       router.refresh();
       toast.success(tostSuccesMessage);
-      router.push(`/${params.storeId}/categorys`);
+      router.push(`/${params.storeId}/sizes`);
     } catch (error) {
       toast.error(
-        " Something when wrong . Category  can`t be " + intialData
+        " Something when wrong . Size  can`t be " + intialData
           ? "updated"
           : "created"
       );
@@ -91,18 +83,16 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
     }
   };
 
-  const onDeleteCategory = async () => {
+  const onDeleteSize = async () => {
     try {
       setLoading(true);
-      await axios.delete(
-        `/api/${params.storeId}/categorys/${params.categoryId}`
-      );
+      await axios.delete(`/api/${params.storeId}/sizes/${params.sizeId}`);
       router.refresh();
-      toast.success(" Category deleted .");
-      router.push(`/${params.storeId}/categorys`);
+      toast.success(" Size deleted .");
+      router.push(`/${params.storeId}/sizes`);
     } catch (error) {
       toast.error(
-        " Something when wrong . Category can`t be deleted ,   recover all products "
+        " Something when wrong . Size can`t be deleted ,   recover all products "
       );
     } finally {
       setLoading(false);
@@ -114,7 +104,7 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
       <AlertModal
         isOpen={open}
         onClose={() => setOpen(false)}
-        onConform={onDeleteCategory}
+        onConform={onDeleteSize}
         loading={loading}
       />
       <div className="flex items-center justify-between">
@@ -147,7 +137,7 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="Category name "
+                      placeholder="Size Name  "
                       {...field}
                     />
                   </FormControl>
@@ -156,29 +146,17 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
             />
             <FormField
               control={form.control}
-              name="billbordId"
+              name="value"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel> Billbord </FormLabel>
-                  <Select
-                    disabled={loading}
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          defaultValue={field.value}
-                          placeholder="Select  a billbord "
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {billbords.map((item) => (
-                        <SelectItem key={item.id } value={item.id}>{item.label}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <FormLabel> Value </FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      placeholder="Size value "
+                      {...field}
+                    />
+                  </FormControl>
                 </FormItem>
               )}
             />
@@ -192,4 +170,4 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
   );
 };
 
-export default CategoryForm;
+export default SizeForm;
