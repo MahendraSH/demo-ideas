@@ -175,7 +175,7 @@ const CategoryForm: FC<CategoryFormProps> = ({ intialData, billbords }) => {
                     </FormControl>
                     <SelectContent>
                       {billbords.map((item) => (
-                        <SelectItem value={item.id}>{item.label}</SelectItem>
+                        <SelectItem key={item.id } value={item.id}>{item.label}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
