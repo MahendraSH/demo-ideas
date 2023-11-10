@@ -1,10 +1,9 @@
-# demo ideas 
+# demo ideas
 
-1. ##  [demo-resume](https://github.com/MahendraSH/demo-ideas/tree/main/demo-resume) 
+1. ## [lms-platform](https://github.com/MahendraSH/demo-ideas/tree/main/lms-pLatform)
 
-### - a resume webiste builder idea (demo )
+### - lerning platform (demo 
 
-#### using mern stack 
+#### using nextjs
 
 ---
-
