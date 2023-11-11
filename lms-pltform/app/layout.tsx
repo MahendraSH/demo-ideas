@@ -6,9 +6,9 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/mode-toggle";
 import { siteConfig } from "@/lib/config/site-config";
+import TosterProvider from "@/components/providers/toster-provider";
 
 const inter = Inter({ subsets: ["latin"] });
-
 
 export const metadata: Metadata = {
   title: {
@@ -70,6 +70,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <TosterProvider  />
             <main className=" bg-background">{children}</main>
             <span className="fixed bottom-4 right-4 ">
               {" "}

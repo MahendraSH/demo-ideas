@@ -11,8 +11,8 @@ interface FooterProps {}
 
 const Footer: FC<FooterProps> = ({}) => {
   return (
-    <div>
-      <footer className="footer items-center p-4  ">
+    <div  className="  pt-4 mt-6">
+      <footer className="footer items-center p-4   ">
         <aside className="items-center grid-flow-col">
           <Logo sidebar={false} />
         </aside>

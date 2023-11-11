@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 import { Button } from "./button";
+import { cn } from "@/lib/utils";
 
 interface LogoProps {
   sidebar: boolean;
@@ -14,7 +15,10 @@ const Logo: FC<LogoProps> = ({ sidebar }) => {
     <Link href={"/"}>
       <Button
         variant={sidebar ? "default" : "ghost"}
-        className="   normal-case text-xl  shadow-none w-full justify-start px-0 mx-0"
+        className={cn(
+          "   normal-case text-xl  shadow-none w-full justify-start px-0 mx-0",
+          !sidebar && "bg-background hover:bg-background"
+        )}
       >
         <Image
           src={`/${imageStr}-dark.png`}
