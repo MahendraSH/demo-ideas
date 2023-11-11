@@ -8,7 +8,7 @@ import TitleForm from "./_components/title-form";
 import DescriptionForm from "./_components/des-form";
 import PriceForm from "./_components/price-form";
 import ImageForm from "./_components/image-form";
-import CategoryIdForm from "./_components/categoryId-form";
+// import CategoryIdForm from "./_components/categoryId-form";
 
 interface CourseIdPageProps {
   params: { courseId: string };
