@@ -41,7 +41,6 @@ const ImageForm: FC<ImageFormProps> = ({ initialData, courseId }) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const res = await axios.patch(`/api/courses/${courseId}`, values);
-      router.push(`/teacher/courses/${res.data.id}`);
       toast.success("Course image updated  . ");
       setIsEditing(false);
       router.refresh();

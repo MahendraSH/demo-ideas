@@ -35,7 +35,11 @@ interface CategoryIdFormProps {
 const formSchema = z.object({
   categoryId: z.coerce.number(),
 });
-const CategoryIdForm: FC<CategoryIdFormProps> = ({ initialData, courseId  ,options}) => {
+const CategoryIdForm: FC<CategoryIdFormProps> = ({
+  initialData,
+  courseId,
+  options,
+}) => {
   const router = useRouter();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -50,7 +54,6 @@ const CategoryIdForm: FC<CategoryIdFormProps> = ({ initialData, courseId  ,optio
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const res = await axios.patch(`/api/courses/${courseId}`, values);
-      router.push(`/teacher/courses/${res.data.id}`);
       toast.success("Course categoryId updated  . ");
       setIsEditing(false);
       router.refresh();
@@ -95,7 +98,7 @@ const CategoryIdForm: FC<CategoryIdFormProps> = ({ initialData, courseId  ,optio
                   <FormItem>
                     <FormLabel>categoryId</FormLabel>
                     <FormControl>
-                    <Combobox options={[...options]}  {...field} />
+                      <Combobox options={[...options]} {...field} />
                     </FormControl>
                     {/* <FormDescription>categoryId for the course </FormDescription> */}
                     <FormMessage />

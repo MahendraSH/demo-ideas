@@ -1,7 +1,13 @@
 import { IconBadge } from "@/components/icon-batch";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
-import { CircleDollarSign, File, IndianRupeeIcon, LayoutDashboardIcon, ListChecksIcon } from "lucide-react";
+import {
+  CircleDollarSign,
+  File,
+  IndianRupeeIcon,
+  LayoutDashboardIcon,
+  ListChecksIcon,
+} from "lucide-react";
 import { redirect } from "next/navigation";
 import { FC } from "react";
 import TitleForm from "./_components/title-form";
@@ -10,6 +16,7 @@ import PriceForm from "./_components/price-form";
 import ImageForm from "./_components/image-form";
 import CategoryIdForm from "./_components/categoryId-form";
 import { ListBulletIcon } from "@radix-ui/react-icons";
+import AttachmentForm from "./_components/attachment-form";
 // import CategoryIdForm from "./_components/categoryId-form";
 
 interface CourseIdPageProps {
@@ -25,6 +32,13 @@ const CourseIdPage: FC<CourseIdPageProps> = async ({ params }) => {
   const course = await db.course.findUnique({
     where: {
       id: Number(params.courseId),
+    },
+    include: {
+      attachments: {
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
     },
   });
 
@@ -96,7 +110,7 @@ const CourseIdPage: FC<CourseIdPageProps> = async ({ params }) => {
             <IconBadge icon={File} />
             <h2 className="text-xl">Resources & Attachments </h2>
           </div>
-          <ImageForm courseId={course.id} initialData={course} />
+          <AttachmentForm courseId={course.id} initialData={course} />
         </div>
       </div>
     </div>

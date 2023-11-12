@@ -26,7 +26,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Course } from "@prisma/client";
 
 interface DescriptionFormProps {
-  initialData:Course;
+  initialData: Course;
   courseId: number;
 }
 
@@ -53,7 +53,6 @@ const DescriptionForm: FC<DescriptionFormProps> = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const res = await axios.patch(`/api/courses/${courseId}`, values);
-      router.push(`/teacher/courses/${res.data.id}`);
       toast.success("Course description updated  . ");
       setIsEditing(false);
       router.refresh();
