@@ -75,12 +75,13 @@ const ImageForm: FC<ImageFormProps> = ({ initialData, courseId }) => {
             </div>
           )}
           {initialData.imageUrl && (
-            <div className="aspect-video relative mt-2 ">
+            <div className=" flex items-center justify-center h-60    rounded-md  mt-2 ">
               <Image
                 src={initialData.imageUrl}
                 alt={initialData.title}
-                fill
-                className=" object-cover rounded-md"
+                width={400}
+                height={240}
+                className=" aspect-video object-cover"
               />
             </div>
           )}

@@ -1,13 +1,15 @@
 import { IconBadge } from "@/components/icon-batch";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
-import { LayoutDashboardIcon } from "lucide-react";
+import { CircleDollarSign, File, IndianRupeeIcon, LayoutDashboardIcon, ListChecksIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 import { FC } from "react";
 import TitleForm from "./_components/title-form";
 import DescriptionForm from "./_components/des-form";
 import PriceForm from "./_components/price-form";
 import ImageForm from "./_components/image-form";
+import CategoryIdForm from "./_components/categoryId-form";
+import { ListBulletIcon } from "@radix-ui/react-icons";
 // import CategoryIdForm from "./_components/categoryId-form";
 
 interface CourseIdPageProps {
@@ -67,8 +69,35 @@ const CourseIdPage: FC<CourseIdPageProps> = async ({ params }) => {
         <TitleForm courseId={course.id} initialData={course} />
         <DescriptionForm courseId={course.id} initialData={course} />
         <ImageForm courseId={course.id} initialData={course} />
-        <PriceForm courseId={course.id} initialData={course} />
-    
+        <CategoryIdForm
+          courseId={course.id}
+          initialData={course}
+          options={categorys.map((item) => ({
+            label: item.name,
+            value: item.id,
+          }))}
+        />
+        <div>
+          <div className="flex items-center gap-x-2">
+            <IconBadge icon={ListChecksIcon} />
+            <h2 className="text-xl"> Course chapters</h2>
+          </div>
+          TODO
+        </div>
+        <div>
+          <div className="flex items-center gap-x-2">
+            <IconBadge icon={IndianRupeeIcon} />
+            <h2 className="text-xl">Sell your course</h2>
+          </div>
+          <PriceForm initialData={course} courseId={course.id} />
+        </div>
+        <div>
+          <div className="flex items-center gap-x-2">
+            <IconBadge icon={File} />
+            <h2 className="text-xl">Resources & Attachments </h2>
+          </div>
+          <ImageForm courseId={course.id} initialData={course} />
+        </div>
       </div>
     </div>
   );

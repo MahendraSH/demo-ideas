@@ -24,17 +24,18 @@ import { useRouter } from "next/navigation";
 import { Pencil } from "lucide-react";
 import { Course } from "@prisma/client";
 import { cn } from "@/lib/utils";
-import { formatPrice } from "@/lib/formates";
+import Combobox from "@/components/ui/combobox";
 
-interface PriceFormProps {
+interface CategoryIdFormProps {
   initialData: Course;
   courseId: number;
+  options: { label: string; value: number }[];
 }
 
 const formSchema = z.object({
-  price: z.coerce.number(),
+  categoryId: z.coerce.number(),
 });
-const PriceForm: FC<PriceFormProps> = ({ initialData, courseId }) => {
+const CategoryIdForm: FC<CategoryIdFormProps> = ({ initialData, courseId  ,options}) => {
   const router = useRouter();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -42,7 +43,7 @@ const PriceForm: FC<PriceFormProps> = ({ initialData, courseId }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      price: initialData.price || undefined,
+      categoryId: initialData.categoryId || undefined,
     },
   });
   const { isSubmitting, isValid } = form.formState;
@@ -50,7 +51,7 @@ const PriceForm: FC<PriceFormProps> = ({ initialData, courseId }) => {
     try {
       const res = await axios.patch(`/api/courses/${courseId}`, values);
       router.push(`/teacher/courses/${res.data.id}`);
-      toast.success("Course price updated  . ");
+      toast.success("Course categoryId updated  . ");
       setIsEditing(false);
       router.refresh();
     } catch (error) {
@@ -60,12 +61,12 @@ const PriceForm: FC<PriceFormProps> = ({ initialData, courseId }) => {
   return (
     <div className=" mt-6  shadow-md  rounder-lg  p-4  dark:shadow-secondary ">
       <div className=" font-medium  flex items-center  justify-between ">
-        Course price
+        Course categoryId
         <Button variant={"ghost"} onClick={() => setIsEditing(!isEditing)}>
           {isEditing && <> Cancel </>}
           {!isEditing && (
             <>
-              <Pencil className="h-5 w-5  mr-2" /> Edit price
+              <Pencil className="h-5 w-5  mr-2" /> Edit categoryId
             </>
           )}
         </Button>
@@ -75,11 +76,11 @@ const PriceForm: FC<PriceFormProps> = ({ initialData, courseId }) => {
           <p
             className={cn(
               "text-sm  text-primary font-medium",
-              !initialData.price && "italic"
+              !initialData.categoryId && "italic"
             )}
           >
-            {initialData.price && formatPrice(initialData.price)}
-            {!initialData.price && <>no price</>}
+            {initialData.categoryId}
+            {!initialData.categoryId && <>no categoryId</>}
           </p>
         </>
       )}
@@ -89,19 +90,14 @@ const PriceForm: FC<PriceFormProps> = ({ initialData, courseId }) => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
                 control={form.control}
-                name="price"
+                name="categoryId"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>price</FormLabel>
+                    <FormLabel>categoryId</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder=" eg: web dev course "
-                        {...field}
-                        disabled={isSubmitting}
-                        autoFocus
-                      />
+                    <Combobox options={[...options]}  {...field} />
                     </FormControl>
-                    {/* <FormDescription>price for the course </FormDescription> */}
+                    {/* <FormDescription>categoryId for the course </FormDescription> */}
                     <FormMessage />
                   </FormItem>
                 )}
@@ -119,4 +115,4 @@ const PriceForm: FC<PriceFormProps> = ({ initialData, courseId }) => {
   );
 };
 
-export default PriceForm;
+export default CategoryIdForm;
